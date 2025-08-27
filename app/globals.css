@@ -1,0 +1,17 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Playwrite+CA:wght@100..400&display=swap'); */
+
+
+
+@import "tailwindcss";
+
+:root{
+ 
+  --font-display:'Brush Script MT', cursive;
+  background-color: #21212b;
+}
+
+@theme{
+  --font-display: var(--font-display);
+}
+
+
