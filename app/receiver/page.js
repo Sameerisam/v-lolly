@@ -1,17 +1,17 @@
 "use client";
 import { useState, useEffect } from "react";
-import { HexColorPicker } from "react-colorful";
+
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import {useSearchParams} from 'next/navigation'
 
+
 export default function Create() {
   let [color, setColor] = useState("#db2777");
-  // let [open, setOpen] = useState(false);
+ 
   let [colo, setColo] = useState("#f97316");
   let [col, setCol] = useState("#a16207");
-  // let [ope, setOpe] = useState(false);
-  // let [op, setOp] = useState(false);
+ 
     const {register,handleSubmit, reset}=useForm(); 
 
     let params = useSearchParams();
@@ -19,7 +19,7 @@ export default function Create() {
 function onSubmit(data){
 axios.post('/api/outh',data).then((resp)=>{
 console.log(resp.data)
-// reset({to:'',message: '',from:''});
+
 })
 console.log("data mill gia",data)
 }
@@ -60,11 +60,6 @@ let isReceiver = !!params.get("id")
           </div>
           <div className="w-6 h-20 bg-pink-300 rounded-b-2xl"></div>
         </div>
-
-        
-        
-      
-
       {/* Form Section */}
       <div className="flex flex-col items-center mt-10 px-4 lg:ml-28">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -95,18 +90,6 @@ let isReceiver = !!params.get("id")
           </div>
        </div>
 
-        {/* <div className="mt-8">
-          <button
-            type="submit"
-
-            className="px-8 py-3 ml-14 rounded-3xl border-2 text-pink-400 border-pink-300 [box-shadow:0_0_15px_#ec4899] 
-            hover:bg-pink-400 hover:text-black hover:border-pink-400 transition"
-            
-          >
-            Freeze this lolly and get a link
-          </button>
-
-        </div> */}
         
          </form>
       </div>
