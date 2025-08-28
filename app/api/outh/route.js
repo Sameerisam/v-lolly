@@ -58,8 +58,9 @@ let mairaData=await req.json();
 console.log(mairaData)
 let newUser=await User(mairaData)
 
-  const protocol = req.headers["x-forwarded-proto"] || "http";
-  const host = req.headers["host"];
+  const headers = Object.fromEntries(req.headers);
+  const protocol = headers["x-forwarded-proto"] || "https";
+  const host = headers["host"];
   const domain = `${protocol}://${host}`;
   // const domain = `http://example.com`;
 
