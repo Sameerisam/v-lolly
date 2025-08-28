@@ -98,7 +98,7 @@ function ReceiverInner() {
   );
 }
 
-// ✅ Wrap inside Suspense to fix build error
+// ✅ Suspense only wraps the part that uses useSearchParams
 export default function ReceiverPage() {
   return (
     <Suspense fallback={<p className="text-center mt-10">Loading...</p>}>
