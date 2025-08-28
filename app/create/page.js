@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { HexColorPicker } from "react-colorful";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -8,28 +8,35 @@ export default function Create() {
   const [color, setColor] = useState("#db2777");
   const [colo, setColo] = useState("#f97316");
   const [col, setCol] = useState("#a16207");
-  const [shareLink,setShareLink]=useState(null)
-
+  const [shareLink, setShareLink] = useState(null);
   const [openPicker, setOpenPicker] = useState(null); // "color" | "colo" | "col" | null
 
-  const { register, handleSubmit, reset,formState:{errors} } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-  // refs for each picker
-  const pickerRefs = {
-    color: useRef(null),
-    colo: useRef(null),
-    col: useRef(null),
-  };
+  // ✅ create refs individually at the top level
+  const colorRef = useRef(null);
+  const coloRef = useRef(null);
+  const colRef = useRef(null);
+
+  // ✅ memoize object so it doesn’t recreate on each render
+  const pickerRefs = useMemo(
+    () => ({
+      color: colorRef,
+      colo: coloRef,
+      col: colRef,
+    }),
+    []
+  );
 
   function onSubmit(data) {
     data.colors = [color, colo, col];
     axios.post("/api/outh", data).then((resp) => {
       console.log(resp.data);
-      setShareLink(resp.data.link)
-      reset({ to: "", message: "", from: "",color:"",colo:"",col:""});
-      setColor("#db2777");  // reset to default or ""
-       setColo("#f97316");
-           setCol("#a16207");
+      setShareLink(resp.data.link);
+      reset({ to: "", message: "", from: "", color: "", colo: "", col: "" });
+      setColor("#db2777");
+      setColo("#f97316");
+      setCol("#a16207");
     });
     console.log("data mill gia", data);
   }
@@ -39,7 +46,7 @@ export default function Create() {
     function handleClickOutside(event) {
       if (
         openPicker &&
-        pickerRefs[openPicker].current &&
+        pickerRefs[openPicker]?.current &&
         !pickerRefs[openPicker].current.contains(event.target)
       ) {
         setOpenPicker(null);
@@ -47,7 +54,14 @@ export default function Create() {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [openPicker]);
+  }, [openPicker, pickerRefs]);
+
+
+
+
+
+
+
 
   return (
     <>

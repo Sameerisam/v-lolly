@@ -8,12 +8,12 @@ async function shortenUrl(link) {
       "https://api.t.ly/api/v1/link/shorten",
       {
         long_url: link,
-        domain: "https://t.ly/",
+        domain:"https://t.ly/",
         expire_at_datetime: "2035-01-17 15:00:00",
         description: "Social Media Link",
         public_stats: true,
         meta: {
-          expiration_url: "https://example.com/",
+          // expiration_url: "https://example.com/",
           smart_urls: [
             {
               type: "US",
@@ -28,7 +28,7 @@ async function shortenUrl(link) {
       },
       {
         headers: {
-          Authorization: "Bearer 6mMslBFz58kPgRIUBjG45wa6mB88LrAqWroJ0Zpcmj6aP7WY9D1ou0Q3Hwuh",
+          Authorization: `Bearer ${process.env.TLY_API_TOKEN}`,
           "Content-Type": "application/json",
           Accept: "application/json",
         },
