@@ -67,7 +67,7 @@ let newUser=await User(mairaData)
 
 
 
-    let link = await shortenUrl(domain+'/receiver?id='+newUser._id);
+    let link = domain+'/receiver?id='+newUser._id;
     newUser.link = link;
   await newUser.save();
 
