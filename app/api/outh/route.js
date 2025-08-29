@@ -61,9 +61,9 @@ let newUser=await User(mairaData)
   const headers = Object.fromEntries(req.headers);
   const protocol = headers["x-forwarded-proto"] || "https";
   const host = headers["host"];
-  const domain = `${protocol}://${host}`;
-  console.log(domain)
-  // const domain = `http://example.com`;
+  // const domain = `${protocol}://${host}`;
+  // console.log(domain)
+  const domain = `https://v-lolly.vercel.app`;
 
 
 
